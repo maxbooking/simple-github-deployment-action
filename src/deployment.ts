@@ -16,7 +16,10 @@ export async function run(): Promise<void> {
       environment: target,
       description: description
         ? description
-        : `Deployment of ${ref} to ${target}`
+        : `Deployment of ${ref} to ${target}`,
+      // Disable auto merge when the requested ref
+      // is behind the repository's default branch
+      auto_merge: false
     })
   } catch (error) {
     if (error instanceof Error) {
