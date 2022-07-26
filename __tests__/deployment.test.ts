@@ -25,9 +25,10 @@ describe('Deployment action test suite', () => {
       .post(`/repos/${repo}/deployments`, {
         ref: ref,
         environment: target,
-        description: description // We can also use a regex: /.+/
+        description: description, // We can also use a regex: /.+/
+        auto_merge: false
       })
-      .reply(200, [
+      .reply(200, 
         {
           url: `https://api.github.com/repos/${repo}/deployments/1`,
           id: 1,
@@ -46,7 +47,7 @@ describe('Deployment action test suite', () => {
           transient_environment: false,
           production_environment: true
         }
-      ])
+      )
 
     await run()
 
